@@ -201,14 +201,36 @@ class TKMarkCoorAnnotation(Frame):
         self.bt_save_video.place(x=920, y=90, height=25)
         #--------------------------------------------------
     
+        #------------
+        self.ent_duration = Entry(self, name="ent_duration", textvariable=StringVar(self, value=self.DURATION))
+        self.ent_duration.place(x=480, y=90, width=60, height=25)
+        
+        self.bt_duration = Button(self, text="Set:{}".format(self.DURATION), bg='black', fg="white", command=self.duration_handler)
+        self.bt_duration.place(x=550, y=90, width=90, height=25)
+        #------------
+        
         #####
+        self.set_position_video_init()
+        self.next_img()
         self.load_annotation(self.videos[self.id])
         
         # reload line
         self.create_line_curso()
-        
         #--------------
-       
+    
+    
+    def duration_handler(self):
+        self.DURATION = int(self.ent_duration.get())
+        self.bt_duration.config(text="Set:{}".format(self.DURATION))
+        # self.ent_duration.delete(0,END)
+        # self.ent_duration.insert(0,self.DURATION)
+        
+        idx = self.list_objs.curselection()[0]
+        
+        self.objetos_coo[idx][-1] = self.DURATION
+        self.objetos_re_draw[idx][-1] = self.DURATION
+        
+        
     def load_config(self):
         data = None
         try:
@@ -272,23 +294,29 @@ class TKMarkCoorAnnotation(Frame):
         self.next_img()
         self.update_img()
         self.redraw_img()
-     
     
- 
     
+    def update_duration(self, dur):
+        self.DURATION = int(dur)
+        self.bt_duration.config(text="Set:{}".format(self.DURATION))
+        
+        self.ent_duration.delete(0, END)
+        self.ent_duration.insert(0, self.DURATION)
     
     def load_annotation(self, name_img):  
-        try:
-            
+        try:       
             full_path_save = "{}{}.json".format(self.path_save_anotation, name_img[:-4])
+            
             with open(full_path_save, 'r') as json_file:
                 data = json.loads(json_file.read())
             
-        
                 for obj in data['Objects']:
                     
                     class_name = obj['Class']
                     frame_id = obj['FrameID']
+                    duration = obj['Duration']
+                    
+                    self.update_duration(duration)
                     
                     # add new class becase not exists
                     select_class = filter(lambda (k, v): v == class_name, self.switch_class.items())
@@ -312,15 +340,14 @@ class TKMarkCoorAnnotation(Frame):
                     
                     self.x1, self.y1, self.x2, self.y2 = x1, y1, x2, y2            
                     
-                    self.objetos_coo.append([class_name, frame_id, self.x1, self.y1, (self.x2 - self.x1), (self.y2 - self.y1)])
+                    self.objetos_coo.append([class_name, frame_id, self.x1, self.y1, (self.x2 - self.x1), (self.y2 - self.y1), duration])
                     self.x1, self.y1, self.x2, self.y2 = self.dcon_x(self.x1), self.dcon_y(self.y1), self.dcon_x(self.x2), self.dcon_y(self.y2)
-                    self.objetos_re_draw.append([class_name, frame_id, self.x1, self.y1, (self.x2 - self.x1), (self.y2 - self.y1)])
+                    self.objetos_re_draw.append([class_name, frame_id, self.x1, self.y1, (self.x2 - self.x1), (self.y2 - self.y1), duration])
                             
                     self.list_objs.insert(END, class_name)
             #--------------------
             
-                print 'Load:', data        
-                
+                print 'Load:', data            
                 self.classe_info()
                 
                 for i, _ in enumerate(self.objetos_coo):
@@ -348,7 +375,8 @@ class TKMarkCoorAnnotation(Frame):
     def recolor_img(self, idx):
         # self.update_video()
         
-        c, id_f, x1, y1, x2, y2 = self.objetos_re_draw[idx]
+        c, id_f, x1, y1, x2, y2, dur = self.objetos_re_draw[idx]
+        self.update_duration(dur)
         self.classe, self.id_frame, self.x1, self.y1, self.x2, self.y2 = c, id_f, x1, y1, (x2 + x1), (y2 + y1)
         
         self.canvas.create_rectangle(self.x1 - 5, self.y1 - 15, self.x1 + 60, self.y1, fill="yellow", outline='yellow', width=2)
@@ -364,6 +392,7 @@ class TKMarkCoorAnnotation(Frame):
         self.redraw_img()
         idx = self.list_objs.curselection()[0]
         
+        
         self.set_position_video_from_anno(idx)
         
         self.recolor_img(idx)
@@ -375,7 +404,10 @@ class TKMarkCoorAnnotation(Frame):
     
     
     def set_position_video_from_anno(self, idx):
-        _, id_f, _, _, _, _ = self.objetos_re_draw[idx]
+        _, id_f, _, _, _, _, dur = self.objetos_re_draw[idx]
+        
+        self.update_duration(dur)
+        
         self.start_video = False 
         
         self.update_video()
@@ -387,7 +419,6 @@ class TKMarkCoorAnnotation(Frame):
         self.update_img()
         self.redraw_img()
         
-    
     def find_pos(self, key):
         for i, idx in enumerate(self.switch_class.keys()):
             if idx == key:
@@ -502,38 +533,41 @@ class TKMarkCoorAnnotation(Frame):
         k = str(e.char)
         
         # para as teclas de atalho n atrapalharem na hora de digitar o track
-  
-        # troca a classe do objecto
-        for key in self.switch_class.keys():
-            if k == str(key):
-                
-                idx = self.find_pos(key)    
-                
-                for i, _ in enumerate(self.switch_class):
-                    self.listbox.selection_clear(i)
-                
-                self.listbox.select_set(idx)
-                
-                if len(self.objetos_coo) > 0:
-                    # print 'classe selecionada: ', self.switch_class[key]
-                    self.classe = self.switch_class[key]
+        
+        # para as teclas de atalho n atrapalharem na hora de digitar o track
+        is_focus = True if str(self.ent_duration.focus_get()).split('.')[-1] == 'ent_duration' else False
+        if is_focus == False:
+            # troca a classe do objecto
+            for key in self.switch_class.keys():
+                if k == str(key):
                     
-                    # muda o nome da classe do objeto dinamicamente
-                    self.canvas.itemconfig(self.text_class, text="{}".format(self.classe))
+                    idx = self.find_pos(key)    
                     
-                    list_select = self.list_objs.curselection()[0]
+                    for i, _ in enumerate(self.switch_class):
+                        self.listbox.selection_clear(i)
                     
-                    # muda classe nas listas
-                    self.objetos_coo[list_select][0] = self.classe
-                    self.objetos_re_draw[list_select][0] = self.classe
+                    self.listbox.select_set(idx)
                     
-                    # update list box
+                    if len(self.objetos_coo) > 0:
+                        # print 'classe selecionada: ', self.switch_class[key]
+                        self.classe = self.switch_class[key]
+                        
+                        # muda o nome da classe do objeto dinamicamente
+                        self.canvas.itemconfig(self.text_class, text="{}".format(self.classe))
+                        
+                        list_select = self.list_objs.curselection()[0]
+                        
+                        # muda classe nas listas
+                        self.objetos_coo[list_select][0] = self.classe
+                        self.objetos_re_draw[list_select][0] = self.classe
+                        
+                        # update list box
+                        
+                        self.list_objs.delete(list_select)
+                        self.list_objs.insert(list_select, self.classe)
+                        self.list_objs.select_set(list_select)
+                        
                     
-                    self.list_objs.delete(list_select)
-                    self.list_objs.insert(list_select, self.classe)
-                    self.list_objs.select_set(list_select)
-                    
-                
         # del 127
         if k == str('c'):
             print "Itens:", len(self.canvas.find_all())
@@ -572,6 +606,8 @@ class TKMarkCoorAnnotation(Frame):
             
             h, w, _ = self.frame.shape
             
+            
+            print self.DURATION
             print 'Anotação gerada!'
             print 'Nome imagem:', self.videos[self.id]
             print 'Resolução: ' , (w, h) 
@@ -902,7 +938,7 @@ class TKMarkCoorAnnotation(Frame):
         if self.dist1 < self.TDIST or self.dist2 < self.TDIST:
             list_select = self.list_objs.curselection()[0]
         else:
-            self.objetos_re_draw.append([self.classe, self.id_frame, self.x1, self.y1, (self.x2 - self.x1), (self.y2 - self.y1)])
+            self.objetos_re_draw.append([self.classe, self.id_frame, self.x1, self.y1, (self.x2 - self.x1), (self.y2 - self.y1), self.DURATION])
        
         self.x1, self.y1, self.x2, self.y2 = self.con_x(self.x1), self.con_y(self.y1), self.con_x(self.x2), self.con_y(self.y2)
                                          
@@ -920,7 +956,7 @@ class TKMarkCoorAnnotation(Frame):
             self.objetos_coo[list_select][5] = self.y2 - self.objetos_coo[list_select][3]
         
         else:
-            self.objetos_coo.append([self.classe, self.id_frame, self.x1, self.y1, (self.x2 - self.x1), (self.y2 - self.y1)])
+            self.objetos_coo.append([self.classe, self.id_frame, self.x1, self.y1, (self.x2 - self.x1), (self.y2 - self.y1), self.DURATION])
             self.list_objs.insert(END, self.classe)
         
         print "Classe: " + str(self.classe) + " | Nome: " + str(self.videos[self.id])[:-4] + "_" + str(self.idImagGlobal) + " | Coordenadas: " + str(self.x1) + ", " + str(self.y1) + ", " + str(self.x2) + ", " + str(self.y2)
@@ -945,8 +981,8 @@ class TKMarkCoorAnnotation(Frame):
     def redraw_img(self):
         self.update_img()
         
-        for c, id_f, x1, y1, x2, y2  in self.objetos_re_draw:
-            
+        for c, id_f, x1, y1, x2, y2, dur  in self.objetos_re_draw:
+            self.update_duration(dur)
             self.classe, self.id_frame, self.x1, self.y1, self.x2, self.y2 = c, id_f, x1, y1, (x2 + x1), (y2 + y1)
             
             self.canvas.create_rectangle(self.x1 - 5, self.y1 - 15, self.x1 + 60, self.y1, fill="green", outline='green', width=2)
@@ -963,10 +999,10 @@ class TKMarkCoorAnnotation(Frame):
                 
         list_objects = []
         for obj in objetos_coo:
-            (type_class, frame_id, x, y, w, h) = obj
+            (type_class, frame_id, x, y, w, h, dur) = obj
             objetc = {
                 "FrameID":frame_id,
-                "Duration":self.DURATION,
+                "Duration":dur,
                 "Class":type_class,
                 "X":x,
                 "Y":y,
@@ -978,7 +1014,7 @@ class TKMarkCoorAnnotation(Frame):
         
         full_path_save = "{}{}.json".format(path_save, name_img[:-4])
         Json_annotation = {
-            "dataset":"EverydayActionsDataset",
+            "Dataset":"EverydayActionsDataset",
             "Owner":"Mouglas",
             "FileName":name_img,
             "Width":res_wid,

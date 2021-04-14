@@ -1,0 +1,99 @@
+pos_cap/aggressor_000000.avi 2 2 2 2 3 445 333 -7 132 282 105 156 360 462 465 -22 9
+pos_cap/aggressor_000000.avi 270 103 169 370 427 472 5 4
+
+pos_cap/aggressor_000001.avi 0 4 1 1 272 93 174 382
+
+pos_cap/aggressor_000002.avi 0 2 1 1 344 123 178 347
+
+pos_cap/aggressor_000003.avi 0 4 1 1 341 108 207 368
+
+pos_cap/aggressor_000004.avi 0 2 1 266 37 192 435
+pos_cap/aggressor_000004.avi 297 42 160 429 489 476 -29 0
+pos_cap/aggressor_000003.avi 350 105 197 370 558 473 -1 -10 352 111 205 352 560 468 -21 5
+pos_cap/aggressor_000002.avi 356 125 165 344 533 473 -19 -3
+pos_cap/aggressor_000001.avi 283 88 162 386 457 469 -4 -18 270 101 183 350 440 461 17 13
+pos_cap/aggressor_000000.avi 281 103 151 372 444 478 -3 -2
+
+
+
+
+
+pos_cap/aggressor_000005.avi 2 2 1 366 120 214 356
+pos_cap/aggressor_000005.avi 372 119 207 356 586 474 51 2
+
+pos_cap/aggressor_000006.avi 1 234 62 198 410pos_cap/aggressor_000000.avi 2 2 2 2 3 445 333 -7 132 282 105 156 360 462 465 -22 9
+pos_cap/aggressor_000000.avi 270 103 169 370 427 472 5 4
+
+pos_cap/aggressor_000001.avi 0 4 1 1 272 93 174 382
+
+pos_cap/aggressor_000002.avi 0 2 1 1 344 123 178 347
+
+pos_cap/aggressor_000003.avi 0 4 1 1 341 108 207 368
+
+pos_cap/aggressor_000004.avi 0 2 1 266 37 192 435
+pos_cap/aggressor_000004.avi 297 42 160 429 489 476 -29 0
+pos_cap/aggressor_000003.avi 350 105 197 370 558 473 -1 -10 352 111 205 352 560 468 -21 5
+pos_cap/aggressor_000002.avi 356 125 165 344 533 473 -19 -3
+pos_cap/aggressor_000001.avi 283 88 162 386 457 469 -4 -18 270 101 183 350 440 461 17 13
+pos_cap/aggressor_000000.avi 281 103 151 372 444 478 -3 -2
+
+
+
+
+
+pos_cap/aggressor_000005.avi 2 2 1 366 120 214 356
+pos_cap/aggressor_000005.avi 372 119 207 356 586 474 51 2
+
+pos_cap/aggressor_000006.avi 3 1 1 234 62 198 410
+pos_cap/aggressor_000006.avi 432 472 -13 -56 252 107 167 309 438 463 -16 15pos_cap/aggressor_000000.avi 2 2 2 2 3 445 333 -7 132 282 105 156 360 462 465 -22 9
+pos_cap/aggressor_000000.avi 270 103 169 370 427 472 5 4
+
+pos_cap/aggressor_000001.avi 0 4 1 1 272 93 174 382
+
+pos_cap/aggressor_000002.avi 0 2 1 1 344 123 178 347
+
+pos_cap/aggressor_000003.avi 0 4 1 1 341 108 207 368
+
+pos_cap/aggressor_000004.avi 0 2 1 266 37 192 435
+pos_cap/aggressor_000004.avi 297 42 160 429 489 476 -29 0
+pos_cap/aggressor_000003.avi 350 105 197 370 558 473 -1 -10 352 111 205 352 560 468 -21 5
+pos_cap/aggressor_000002.avi 356 125 165 344 533 473 -19 -3
+pos_cap/aggressor_000001.avi 283 88 162 386 457 469 -4 -18 270 101 183 350 440 461 17 13
+pos_cap/aggressor_000000.avi 281 103 151 372 444 478 -3 -2
+
+
+
+
+
+pos_cap/aggressor_000005.avi 2 2 1 366 120 214 356
+pos_cap/aggressor_000005.avi 372 119 207 356 586 474 51 2
+
+pos_cap/aggressor_000006.avi 2 3 3 1 1 234 62 198 410
+pos_cap/aggressor_000006.avi 432 472 -13 -56 252 107 167 309 438 463 -16 15
+pos_cap/aggressor_000006.avi 229 57 192 420 400 427 25 49pos_cap/aggressor_000000.avi 2 2 2 2 3 445 333 -7 132 282 105 156 360 462 465 -22 9
+pos_cap/aggressor_000000.avi 270 103 169 370 427 472 5 4
+
+pos_cap/aggressor_000001.avi 0 4 1 1 272 93 174 382
+
+pos_cap/aggressor_000002.avi 0 2 1 1 344 123 178 347
+
+pos_cap/aggressor_000003.avi 0 4 1 1 341 108 207 368
+
+pos_cap/aggressor_000004.avi 0 2 1 266 37 192 435
+pos_cap/aggressor_000004.avi 297 42 160 429 489 476 -29 0
+pos_cap/aggressor_000003.avi 350 105 197 370 558 473 -1 -10 352 111 205 352 560 468 -21 5
+pos_cap/aggressor_000002.avi 356 125 165 344 533 473 -19 -3
+pos_cap/aggressor_000001.avi 283 88 162 386 457 469 -4 -18 270 101 183 350 440 461 17 13
+pos_cap/aggressor_000000.avi 281 103 151 372 444 478 -3 -2
+
+
+
+
+
+pos_cap/aggressor_000005.avi 2 2 1 366 120 214 356
+pos_cap/aggressor_000005.avi 372 119 207 356 586 474 51 2
+
+pos_cap/aggressor_000006.avi 3 2 2 3 3 1 1 234 62 198 410
+pos_cap/aggressor_000006.avi 432 472 -13 -56 252 107 167 309 438 463 -16 15
+pos_cap/aggressor_000006.avi 229 57 192 420 400 427 25 49
+pos_cap/aggressor_000006.avi 424 476 -10 -65 250 102 164 309 436 457 -16 20pos_cap/aggressor_000000.avi 2 2 2 2 3 445 333 -7 132 282 105 156 360 462 465 
