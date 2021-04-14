@@ -1,0 +1,17 @@
+{
+	"class": {
+		"1": "aggressor",
+		"2": "fall",
+		"3": "jump",
+		"4": "raise",
+		"5": "run",
+		"6": "sit",
+		"7": "standart",
+		"8": "walk"
+	},
+	"dataset": {
+		"inputs": "/home/avantia/python-workspace/PoseTensorRTActionDetection/EverydayActionsDataset/",
+		"outputs": "/home/avantia/python-workspace/PoseTensorRTActionDetection/EverydayActionsDataset/",
+		"anotations": "/home/avantia/python-workspace/PoseTensorRTActionDetection/EverydayActionsDataset/Annotations/"
+	}
+}
