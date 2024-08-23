@@ -10,8 +10,8 @@
 		"8": "walk"
 	},
 	"dataset": {
-		"inputs": "/home/avantia/python-workspace/PoseTensorRTActionDetection/EverydayActionsDataset/aggressor/",
-		"outputs": "/home/avantia/python-workspace/PoseTensorRTActionDetection/EverydayActionsDataset/aggressor/",
-		"anotations": "/home/avantia/python-workspace/PoseTensorRTActionDetection/EverydayActionsDataset/Annotations/"
+		"inputs": "/home/python-workspace/PoseTensorRTActionDetection/EverydayActionsDataset/aggressor/",
+		"outputs": "/home/python-workspace/PoseTensorRTActionDetection/EverydayActionsDataset/aggressor/",
+		"anotations": "/home/python-workspace/PoseTensorRTActionDetection/EverydayActionsDataset/Annotations/"
 	}
 }
